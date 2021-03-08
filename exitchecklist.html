@@ -1,0 +1,237 @@
+<html>
+    <style>
+        body {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        th {
+            vertical-align : middle; text-align:center;
+        }
+        td.no{
+            vertical-align : middle; text-align:center;
+        }
+        textarea{
+            max-width: 100%;
+        }
+        form{
+            padding: 20px;
+        }
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+        .unselectable{
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+    </style>
+    <head>
+        <title>Exit Checklist</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script> -->
+        <!-- <link rel="stylesheet" href="https://github.com/vitalets/bootstrap-datepicker/blob/master/css/datepicker.css">\
+        <script src="https://github.com/vitalets/bootstrap-datepicker/blob/master/js/bootstrap-datepicker.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.js"></script>
+        <!-- <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script> -->
+        <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+        <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/> -->
+        <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+    </head>
+
+    <body>
+        <form id="formSubmit" method="POST" enctype='application/json'>
+            <div class="row">
+                <h1>Exit Checklist</h1>
+                <h6>1. Employee Information</h6>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="name_emp">Name:</label>
+                    <input type="text" class="form-control" id="name_emp" placeholder="Name" value="" required readonly>
+                    <input type="text" class="d-none" id="emp_id">
+                </div>
+                <div class="col-md-6">
+                    <label for="employee_id">Employee ID:</label>
+                    <input type="text" class="form-control" id="employee_id" placeholder="Employee ID" value="" required readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="div_dept">Division/Department:</label>
+                    <input type="text" class="form-control" id="div_dept" placeholder="Division/Department" value="" required readonly>
+                    <input type="text" class="d-none" id="pos_id">
+                </div>
+                <div class="col-md-6">
+                    <label for="date_resign">Effective Date of Resignation:</label>
+                    <input type="text" class="form-control" id="date_resign" placeholder="Effective Date of Resignation" value="" required readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="form_id">Form ID:</label>
+                    <input type="text" class="form-control" id="form_id" placeholder="Form ID" value="" required readonly>
+                </div>
+                <div class="col-md-6">
+                    <label for="last_day">Last Day of Work:</label>
+                    <input type="text" class="form-control" id="last_day" placeholder="Effective Date of Resignation" value="" required readonly>
+                </div>
+            </div>
+
+            <div class="row">
+                <h6><br>Checklist detail to be done by employee</h6>
+            </div>
+            <table class="table table-bordered" width="100%" id="tableHeader">
+                <thead>
+                    <tr>
+                        <th style="text-align:center;" class="col-md-1" rowspan="2">No.</th>
+                        <th style="text-align:center;" class="col-md-5" rowspan="2">Description</th>
+                        <th style="text-align:center;" colspan="2">Completed by</th>
+                        <th style="text-align:center;" class="col-md-2" rowspan="2">Remarks</th>
+                    </tr>
+                    <tr>
+                        <th style="text-align:center;" class="col-md-2">Date</th>
+                        <th style="text-align:center;" class="col-md-2">Initial & Sign</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    
+                </tbody>
+                <!-- <tbody>
+                    <tr>
+                        <td class="no">4</td>
+                        <td>Hand over / retrieve of all :
+                            <li>Keys of <textarea class="form-control" name="" id="" rows="3"></textarea>;</li>
+                            <li>company’s owned and/or rental equipments & furniture (please write down details): <textarea class="form-control" name="" id="" rows="3"></textarea>;</li>
+                            <li>Staff ID;</li>
+                            <li>Other <textarea class="form-control" name="" id="" rows="3"></textarea>;</li>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td style="text-align:center;"><strong>Ondi Siahaan</strong></td>
+                        <td><strong>GA / Regional HR:</strong>
+                            <li>To confirm received in proper & usable condition</li>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="no">5</td>
+                        <td>Cancel / Migration / Change subscription status of SIM Card<br>
+                            No: <input type="text">
+                        </td>
+                        <td>&nbsp;</td>
+                        <td style="text-align:center;">
+                            <strong>Emi Huzaemi/Noor Saiviasih (Evi)</strong><br><br><br><br>
+                            <strong>Willy</strong>
+                        </td>
+                        <td><strong>Customer Operations / Regional Customer Operations:</strong>
+                            <li>To ensure immediate action</li>
+                            <strong>Finance Operations/ Collections/ Regional Finance</strong>
+                            <li>To ensure immediate action</li>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="no">6</td>
+                        <td>Revoke / disable :<br>
+                            <li>Staff ID Card access;</li>
+                            <li>Login ID;</li>
+                            <li>Network ID / user account;</li>
+                            <li>Email address;</li>
+                            Hand over / retrieve all:
+                            <li>Laptop/PC;</li>
+                            <li>USB/data card;</li>
+                            <li>Others: <textarea name="" id="" class="form-control" rows="3"></textarea></li>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td style="text-align:center;">
+                            <strong>Johan Nugroho</strong>
+                        </td>
+                        <td><strong>IT / Enterprise:</strong>
+                            <li>To ensure immediate action</li>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="no">7</td>
+                        <td>
+                            <li>Checking contract agreement on training;</li>
+                            <li>Conduct exit interview;</li>
+                            Calculation of:
+                            <li>Last day on payroll;</li>
+                            <li>THR/bonus, if any;</li>
+                            <li>Other additional <textarea name="" class="form-control" id="" cols="30" rows="10"></textarea></li>
+                            <li>Other deduction <textarea name="" class="form-control" id="" cols="30" rows="10"></textarea></li>
+                            Revoke / Disable:
+                            <li>Jamsostek;</li>
+                            <li>Medical Insurance;</li>
+                            <li>Retirement Fund;</li>
+                            <li>Others: <textarea name="" id="" class="form-control" rows="3"></textarea></li>
+                            Issuance & acceptance of Reference letter
+                        </td>
+                        <td>&nbsp;</td>
+                        <td style="text-align:center;">
+                            <strong>Agus Hermawan</strong>
+                        </td>
+                        <td><strong>HR/Regional HR:</strong>
+                            <li>To ensure immediate action</li>
+                            <li>To keep in personnel file</li>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="no">8</td>
+                        <td>
+                            Performance Management (Applicable for Manager who has people responsibility):
+                            <li>Finalized KPI;</li>
+                            <li>Interim Performance Management;</li>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td style="text-align:center;">
+                            <strong>Agus Hermawan</strong>
+                        </td>
+                        <td><strong>HR/Regional HR:</strong>
+                            <li>To ensure immediate action</li>
+                        </td>
+                    </tr>
+                </tbody> -->
+            </table>
+
+            <div class="row">
+                <h6>2. Signature</h6>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Approved by:<br>(Manager)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="superiorName">Name: </label>
+                                    <input type="text" class="form-control" placeholder="Superior Name" id="superiorName">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="superiorPosition">Position: </label>
+                                    <input type="text" class="form-control" placeholder="Position" id="superiorPosition">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="superiorSignature">Signature/Date: </label>
+                                    <input type="text" class="form-control" placeholder="Signature/Date" id="superiorSignature">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button id="btnSubmit" class="btn btn-primary" type="submit">Submit form</button>
+        </form>   
+    </body>
+
+    <script src="get.js"></script>
+    <script src="post.js"></script>
+</html>
