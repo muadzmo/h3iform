@@ -1,0 +1,547 @@
+<html>
+    <style>
+        body {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        th {
+            vertical-align : middle; text-align:center;
+        }
+        td.no{
+            vertical-align : middle; text-align:center;
+        }
+        form{
+            padding: 20px;
+        }
+        table td {
+            position: relative;
+        }
+        table td input {
+            position: absolute;
+            display: block;
+            top:0;
+            left:0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            border: none;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        table td select {
+            position: absolute;
+            display: block;
+            top:0;
+            left:0;
+            margin: 0;
+            /* height: 100%; */
+            width: 100%;
+            border: 0;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+    <head>
+        <title>Candidate Interview and Assessment Form</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.js"></script> -->
+    </head>
+    <body>
+        <form id="formSubmit" method="POST" enctype='application/json'>
+            <div class="row">
+                <h1>Candidate Interview and Assessment Form</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="app_name"><strong>Nama Kandidat</strong>/<i>Candidate's Name</i></label>
+                    <input type="text" class="form-control" id="app_name" placeholder="Name" value="" required readonly>
+                    <input type="text" class="d-none" id="app_id">
+                </div>
+                <div class="col-md-11">
+                    <label for="position"><strong>Posisi Ditawarkan</strong>/<i>Position Offer</i></label>
+                    <input type="text" class="form-control" id="position" placeholder="Position" value="" required readonly>
+                    <input type="text" class="d-none" id="position">
+                </div>
+                <div class="col-md-1">
+                    <label for="grade"><strong>Grade</strong></label>
+                    <input type="text" class="form-control" name="grade" id="grade" required readonly>
+                </div>
+                <div class="col-md-12">
+                    <label for="division"><strong>Divisi</strong>/<i>Division</i></label>
+                    <input type="text" class="form-control" id="division" placeholder="Division" value="" required readonly>
+                    <input type="text" class="d-none" id="division">
+                </div>
+                <div class="col-md-12">
+                    <label for="interview_date"><strong>Tanggal Wawancara</strong>/<i>Interview Date</i></label>
+                    <input type="text" class="form-control" id="interview_date" placeholder="Interview_Date" value="" required readonly>
+                    <input type="text" class="d-none" id="interview_date">
+                    <br>
+                </div>
+            </div>
+
+            <table class="table table-bordered" width="100%">
+                <thead id="headDimension">
+                    <tr>
+                        <td colspan=2 style="text-align:center;">
+                            <strong>DIMENSI</strong>/<i>DIMENSION</i>
+                        </td>
+                        <td colspan="5" style="text-align:center;">
+                            <strong>PENILAIAN</strong>/<i>GRADE</i>
+                        </td>
+                    </tr>
+                    <tr id="gradeDimension">
+                        <td rowspan="2" colspan=2 style="vertical-align: middle; padding-left: 2%;" class="col-md-12"><strong><i>Grade: 5: Very Good; 4: Good; 3: Fair; 2: Poor; 1: Very Poor</i></strong></td>
+                    </tr>
+                </thead>
+                <tbody id="bodyDimension">
+                </tbody>
+                <tr>
+                    <td colspan="7" style="text-align:center;"><strong>KOMPETENSI FUNGSIONAL</strong>/<i>FUNCTIONAL COMPETENCE</i> -<strong>pilih yang sesuai</strong>/<i>choose which appropriate</i></td>
+                </tr>
+                <tbody id="bodyCompetence">
+                </tbody>
+                <tr id="emptyness"><td colspan="7">&nbsp;</td></tr>
+                <tr>
+                    <td colspan="5" style="vertical-align: middle; padding-left: 2%;"><strong><i>Grade: 5: Very Good; 4: Good; 3: Fair; 2: Poor; 1: Very Poor</i></strong></td>
+                    <!-- <td rowspan="2" style="vertical-align: middle; text-align: center;"><strong>HR</strong></td>
+                    <td colspan="2"><strong>USER(S)</strong></td> -->
+                </tr>
+                <!-- <tr>
+                    <td>(1)</td>
+                    <td>(2)</td>
+                </tr> -->
+                <tbody id="bodyEvaluation">
+                    <!-- <tr>
+                        <td colspan="2" style="padding-left: 2%;"><strong>Evaluation Rating (please make rate to candidate’s performance: 1 – 5)</strong></td>
+                        <td><input id="evalHr" style="text-align: center;" onchange="cekVal(this.id);"  type="text"></td>
+                        <td><input id="evalUser1" style="text-align: center;" onchange="cekVal(this.id);" type="text"></td>
+                        <td><input id="evalUser2" style="text-align: center;" onchange="cekVal(this.id);" type="text"></td>
+                    </tr> -->
+                    <!-- <tr>
+                        <td colspan="5" style="padding-left: 2%; padding-right: 10%;">
+                            <div style="float:left"><strong><u>User's Name</u></strong></div>
+                            <div style="float:right"><strong><u>Signature:</u></strong></div>
+                        </td>
+                    </tr> -->
+                </tbody>
+                <tr>
+                    <td colspan="5" style="padding-left: 2%;">
+                        <strong>Position Confirmation: </strong>
+                        <input id="pos_confirm" type="text" style="width: 70%; position: relative; display: inline;">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="padding-left: 2%;">
+                        <strong>Additional Comments, if any:</strong>
+                        <textarea id="add_comment" name="" class="form-control" rows="2"></textarea>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td colspan="5" style="text-align: center;"><strong>Used for HR only</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="padding-left: 2%;">
+                        <strong>Follow up Actions Required (please check mark/ put comments):</strong>
+                    </td>
+                </tr>
+                <tbody id="bodyHR">
+                </tbody> -->
+            </table>
+            <button class="btn btn-primary" type="submit" id="btnSubmit">Submit form</button>
+        </form>
+    </body>
+</html>
+<!-- <script src="get.js"></script> -->
+<script>
+    // fetch("https://api.mocki.io/v1/1ae76ad5")
+    // .then(response=>{return response.json();})
+    // .then(responseJson=>{
+    //     if (responseJson.error) {
+    //         console.log(responseJson.error);
+    //         alert(responseJson.error);
+    //     } 
+    //     else {
+    //         // console.log(responseJson.interview[0].description.length);
+    //         console.log(responseJson.data);
+    //         renderAll(responseJson.data);
+    //         arrInterview = responseJson.data;
+    //     }
+    // })
+    // .catch(err => console.log('Request Failed', err));
+    // const responseJson = {"data":{"app_name":"Mohamad Mu'adz","app_id":"DO123","position":"Implementer","grade":"Staff","division":"IMP AT","interview_date":"2021-02-09","dimension":[{"subject":"<strong>Kepemimpinan Operasional</strong>/Operational Leadership","detail":"<strong>a.Mengimplementasikan tindakan yang sistematis dan tepat waktu</strong>/<br>Implement systematic and timely action<br><strong>b.Melakukan eskalasi atas masalah dengan alternatif solusi</strong>/<br>Escalate problems with alternative solutions<br><strong>c.Menunjukkan keinginan kuat untuk belajar</strong>/<br>Demonstrate willingness to learn","hr_score":"","user1_score":"","user2_score":""},{"subject":"<strong>Pengambilan Keputusan Berbasis Analisis</strong>/Analytical Decision Making","detail":"<strong>a.Memperinci problem menjadi bagian- bagian dan menganalisis data untuk mengambil tindakan</strong>/<br><i>Breakdown problems/issues into parts and analyze data to take actions</i><br><strong>b.Mengumpulkan informasi dan mengubahnya menjadi data untuk dianalisis serta untuk pengambilan keputusan</strong>/<br><i>Gather information and turn into data for analysis and decision making</i><br><strong>c.Mengenali akar masalah dalam setiap situasi dan menyediakan alternatif solusi</strong>/<i>Recognize root cause in situation to provide alternative solutions</i>","hr_score":"","user1_score":"","user2_score":""},{"subject":"<strong>Kerja Tim dan Kolaborasi</strong>/<i>Teamwork and Collaboration</i>","detail":"<strong>a.Membangun hubungan kerja positif didalam tim sendiri maupun lintas tim melalui respek dan pemahaman kepada orang lain</strong>/<i>Build positive relationship within and across team through mutual respect and understanding of others.</i><br><strong>b.Berbagi keahlian dan sudut pandang, mencari umpan balik dan ide serta berani bertanya atau memberikan tantangan atas hal-hal seputar pekerjaan</strong>/<i>Share expertise & insight, seek feedback & ideas, and have courage to ask/ challenge.</i><br><strong>c.Mendukung keputusan tim dan secara aktif berpartisipasi mencapai tujuan tim</strong>/<i>Support team's decision and actively participate to achieve team's objectives.</i>","hr_score":"","user1_score":"","user2_score":""}],"competence":[{"category":"<strong>Kompetensi Teknis</strong>/<i>Technical Competence:</i>","item_category":[{"subject":"","hr_score":"","user1_score":"","user2_score":""},{"subject":"","hr_score":"","user1_score":"","user2_score":""}]},{"category":"<strong>Kompetensi Bisnis</strong>/<i>Business Competence:</i>","item_category":[{"subject":"","hr_score":"","user1_score":"","user2_score":""},{"subject":"","hr_score":"","user1_score":"","user2_score":""},{"subject":"","hr_score":"","user1_score":"","user2_score":""}]},{"category":"<strong>Kompetensi Finansial</strong>/<i>Finance Competence:</u>","item_category":[{"subject":"","hr_score":"","user1_score":"","user2_score":""},{"subject":"","hr_score":"","user1_score":"","user2_score":""},{"subject":"","hr_score":"","user1_score":"","user2_score":""}]}],"evaluation":[{"subject":"<strong>Evaluation Rating (please make rate to candidate’s performance: 1 – 5)<strong>","hr_score":"","user1_score":"","user2_score":""}],"pos_confirm":"wadaw","add_comment":"","user":[{"name":"Angel"},{"name":"Marctinius"},{"name":"Andrey Tjahaja"}]},"token":"wadadaw","role":"user_1"};
+    // ,"hr":"Angel","role":"hr"
+
+    let arrInterview;
+    const key = CryptoJS.enc.Base64.parse("MTIzNDU2NzgxMjM0NTY3OA==");
+    const iv  = CryptoJS.enc.Base64.parse("EBESExQVFhcYGRobHB0eHw==");
+    
+    // string ori
+    //let string = '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'
+
+    // string diubah sedikit
+    // let string = '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'
+
+    // string sudut pandang orang kedua
+    let string = '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'
+
+    const decrypted = CryptoJS.AES.decrypt(string, key, {iv: iv});
+    const decrUtf = decrypted.toString(CryptoJS.enc.Utf8);
+    const responseJson = JSON.parse(decrUtf);
+    console.log(responseJson);
+    // console.log(decrUtf);
+    renderAll(responseJson);
+    arrInterview = responseJson;
+    // console.log(responseJson);
+    // renderAll(responseJson.data);
+    // arrInterview = responseJson.data;
+
+
+    function renderAll(responseJson){
+        document.getElementById("app_name").value=`${responseJson.app_name}`;
+        document.getElementById("app_id").value=`${responseJson.app_id}`;
+        document.getElementById("position").value=`${responseJson.position}`;
+        document.getElementById("grade").value=`${responseJson.grade.split("_")[1]}`;
+        document.getElementById("division").value=`${responseJson.division}`;
+        document.getElementById("interview_date").value=`${responseJson.interview_date}`;
+
+        // dimension
+        // line sini buat nambahin headDimension yang buat loop orang2nya secara dinamis
+        
+        for(let h=0;h<responseJson.pic.length;h++){
+            let x = document.getElementById("gradeDimension");
+            let y = x.insertCell(-1)
+            y.innerHTML += (responseJson.pic[h].emp_name);
+            // y.style.minWidth ="20%"
+        }
+        // for(let h=0; h<responseJson)
+
+        for(let i=0; i<responseJson.dimension.length; i++){
+            let num = i+1;
+            // let dimSubNum = 'dimSubNum_'+i;
+            // let dimDetNum = 'dimDetNum_'+i;
+            // let dimHrNum = 'dimHrNum_'+i;
+            // let dimUser1Num = 'dimUser1Num_'+i;
+            // let dimUser2Num = 'dimUser2Num_'+i;
+            document.getElementById("bodyDimension").innerHTML+=
+            (
+                '<tr id="tr_dim_'+i+'">'
+                    +'<td>'+num+'. '+responseJson.dimension[i].subject+'</td>'
+                    +'<td>'+responseJson.dimension[i].detail+'</td>'
+                // +'<tr>'
+            )
+            for(j=0;j<responseJson.dimension[i].pic.length;j++){
+                let x = document.getElementById("tr_dim_"+i);
+                let dimScoreUser = 'dimScoreUser_'+i+'_'+j
+                let ans = responseJson.dimension[i].pic[j].answer;
+                x.insertCell(-1).innerHTML = (
+                    // '<input type="text" style="text-align: center;" id="'+dimScoreUser+'" value="" onchange="cekVal(this.id);">'
+                    '<select class="form-select" name="'+dimScoreUser+'" id="'+dimScoreUser+'">'
+                        +'<option value="1">1</option>'
+                        +'<option value="2">2</option>'
+                        +'<option value="3">3</option>'
+                        +'<option value="4">4</option>'
+                        +'<option value="5">5</option>'
+                    +'</select>'
+                );
+                // jadikan disable yang bukan pic_no nya
+                if(responseJson.pic_no != responseJson.dimension[i].pic[j].pic_no){
+                    document.getElementById(dimScoreUser).disabled="true";
+                }
+                // jadikan selected pada value yang telah diinput
+                if(ans != ""){
+                    document.getElementById(dimScoreUser).options[ans-1].setAttribute("selected","")
+                }
+            }
+        }
+
+        // competence
+        for(let i=0; i<responseJson.competence.length; i++){
+            let compCat = 'compCat_'+i;
+            let comCatNum = i+1;
+            let comCatAfter = 'compCat_'+comCatNum;
+            if(comCatNum == responseJson.competence.length){
+                comCatAfter = 'emptyness';
+            }
+            let totalCompNum = responseJson.competence[i].item_category.length-1;
+            let idButton ='compSubNum_'+i+'_'+totalCompNum
+            let compDelSub = idButton
+            document.getElementById("bodyCompetence").innerHTML+=
+            (
+                '<tr id='+compCat+'>'
+                    +'<td colspan="5">'+responseJson.competence[i].category+' <button type="button" onclick="addSubject(this.id,`'+compDelSub+'`);" id="btn_'+comCatAfter+'" class="btn btn-primary btn-sm">+</button> <button type="button" onclick="delSubject(this.id,`'+comCatAfter+'`);" id="btn_'+compDelSub+'" class="btn btn-danger btn-sm">-</button></td>'
+                +'</tr>'
+            )
+
+            for(let j=0; j<responseJson.competence[i].item_category.length; j++){
+                let compNum = j+1;
+                let compSubNum = 'compSubNum_'+i+'_'+j;
+                // let compHrNum = 'compHrNum_'+i+'_'+j;
+                // let compUser1Num = 'compUser1Num_'+i+'_'+j;
+                // let compUser2Num = 'compUser2Num_'+i+'_'+j;
+                document.getElementById("bodyCompetence").innerHTML+=
+                (
+                    '<tr id='+compSubNum+'>'
+                        +'<td colspan="2">'+compNum+'. '
+                        +'<input type="text" id="inp_'+compSubNum+'" style="margin-left:23px; display: inline; width:92%;" value="'+responseJson.competence[i].item_category[j].subject+'">'
+                        +'</td>'
+                        // +'<textarea id="inp_'+compSubNum+'" class="form-control" ></textarea>'
+                    // +'</tr>'
+                )
+                for(k=0;k<responseJson.competence[i].item_category[j].pic.length;k++){
+                    let x = document.getElementById(compSubNum);
+                    let compScoreUser = 'compScoreUser_'+i+'_'+j+'_'+k;
+                    let ans = responseJson.competence[i].item_category[j].pic[k].answer
+                    x.insertCell(-1).innerHTML = (
+                        // '<input type="text" style="text-align: center;" id="'+compScoreUser+'" value="" onchange="cekVal(this.id);">'
+                        '<select class="form-select" name="'+compScoreUser+'" id="'+compScoreUser+'">'
+                            +'<option value="1">1</option>'
+                            +'<option value="2">2</option>'
+                            +'<option value="3">3</option>'
+                            +'<option value="4">4</option>'
+                            +'<option value="5">5</option>'
+                        +'</select>'
+                    );
+                    // jadikan disable yang bukan pic_no nya
+                    if(responseJson.pic_no != responseJson.competence[i].item_category[j].pic[k].pic_no){
+                        document.getElementById(compScoreUser).disabled="true";
+                    }
+                    // jadikan selected pada value yang telah diinput
+                    if(ans != ""){
+                        document.getElementById(compScoreUser).options[ans-1].setAttribute("selected","")
+                    }
+                }
+            }
+        }
+        
+        // evaluation
+        let trEval = document.getElementById("bodyEvaluation").insertRow(0);
+        let tdEval = trEval.insertCell(0)
+        tdEval.innerHTML += ('<strong>Evaluation Rating (please make rate to candidate’s performance: 1 – 5)</strong>')
+        tdEval.colSpan="2" 
+        tdEval.style="padding-left: 2%;"
+        for(i=0;i<responseJson.pic.length;i++){
+            let evalScoreUser = 'evalScoreUser_'+i;
+            let ans = responseJson.evaluation[0].pic[i].answer;
+            trEval.insertCell(i+1).innerHTML+=(
+                '<select class="form-select" name="'+evalScoreUser+'" id="'+evalScoreUser+'">'
+                    +'<option value="1">1</option>'
+                    +'<option value="2">2</option>'
+                    +'<option value="3">3</option>'
+                    +'<option value="4">4</option>'
+                    +'<option value="5">5</option>'
+                +'</select>')
+            // jadikan disable yang bukan pic_no nya
+            if(responseJson.pic_no != responseJson.evaluation[0].pic[i].pic_no){
+                document.getElementById(evalScoreUser).disabled="true";
+            }
+            // jadikan selected pada value yang telah diinput
+            if(ans != ""){
+                document.getElementById(evalScoreUser).options[ans-1].setAttribute("selected","")
+            }
+        }
+        
+        // position confirmation dan add comment
+        document.getElementById("pos_confirm").value=responseJson.pos_confirm;
+        document.getElementById("add_comment").value=responseJson.add_comment;
+
+        if(responseJson.edit == 0 && responseJson.submitted == "yes"){
+            document.getElementById('btnSubmit').style.display = "none"
+        }
+    }
+
+    function cekVal(button_id){
+        let theInput = document.getElementById(button_id);
+        if((theInput.value > 5 || theInput.value < 1) || isNaN(theInput.value)){
+            alert("That's not a valid input");
+            theInput.value='';
+        }
+    }
+
+    function addSubject(button_id,compDelSub){
+        // button_id = id berikutnya dari id competence category, misal comp1 jadinya comp2 supaya bisa insert pakai beforebegin
+        // compDelSub = id competence subject terakhir yang nasibnya bakal dihapus kalau pencet button - (minus)
+        // compNum = fungsinya buat memetakan competence category row ada di mana
+        let compNum = compDelSub.substring(11,12);
+        let compSubNum = '';
+        let compHrNum = '';
+        let compUser1Num = '';
+        let compUser2Num = '';
+        let i = 0;
+        let subjectNum = button_id.split("_")[2]
+        subjectNum = parseInt(subjectNum)-1
+        while (document.getElementById('compSubNum_'+compNum+'_'+i)){
+            j = i+1;
+            compSubNum = 'compSubNum_'+compNum+'_'+j;
+            compSubNumPrev = 'compSubNum_'+compNum+'_'+i;
+            compHrNum = 'compHrNum_'+compNum+'_'+j;
+            compUser1Num = 'compUser1Num_'+compNum+'_'+j
+            compUser2Num = 'compUser2Num_'+compNum+'_'+j
+            i++;
+        }
+        // console.log(compSubNum);
+        let parent = document.getElementById(button_id.substring(4));
+        console.log(document.getElementById(compSubNumPrev).style.display);
+        if (document.getElementById(compSubNumPrev).style.display=="none"){
+            document.getElementById(compSubNumPrev).style.display="";
+        } else {
+            i = i+1
+            parent.insertAdjacentHTML("beforebegin",
+            '<tr id="'+compSubNum+'">'
+                +'<td colspan="2">'+i+'. '+'<input type="text" id="inp_'+compSubNum+'" style="margin-left:20px; display: inline; width:92%;"></td>'
+            // +'</tr>'
+            );
+            console.log(arrInterview);
+            for(k=0; k<arrInterview.pic.length; k++){
+                let catNum = parseInt(button_id.substring(button_id.length-1))-1
+                console.log(catNum);
+                let x = document.getElementById(compSubNum);
+                let compScoreUser = 'compScoreUser_'+catNum+'_'+j+'_'+k;
+                x.insertCell(-1).innerHTML = (
+                    // '<input type="text" style="text-align: center;" id="'+compScoreUser+'" value="" onchange="cekVal(this.id);">'
+                    '<select class="form-select" name="'+compScoreUser+'" id="'+compScoreUser+'">'
+                        +'<option value="1">1</option>'
+                        +'<option value="2">2</option>'
+                        +'<option value="3">3</option>'
+                        +'<option value="4">4</option>'
+                        +'<option value="5">5</option>'
+                    +'</select>'
+                );
+
+                // disable next competence berdasarkan pic_no competence pertama,
+                if(arrInterview.pic_no != arrInterview.competence[subjectNum].item_category[0].pic[k].pic_no){
+                    document.getElementById(compScoreUser).disabled="true";
+                }
+            }
+
+            // +'<td></td>'
+            // +'<td><input type="text" style="text-align: center;" id="'+compUser1Num+'" value=""></td>'
+            // +'<td><input type="text" style="text-align: center;" id="'+compUser2Num+'" value=""></td>'
+        }
+        document.getElementById(button_id).setAttribute("onClick","addSubject(this.id,`"+compSubNum+"`);");
+        document.getElementById('btn_'+compDelSub).id = 'btn_'+compSubNum
+    }
+
+    function delSubject(button_id,comCatAfter){
+        if(!document.getElementById(button_id.substring(4,17)+1)){
+            // alert("Wait, that's Illegal!");
+            document.getElementById(button_id.substring(4,button_id.length-1)+0).style.display = "none";
+            return false;
+        }
+        let compNum = button_id.substring(15,16);
+        let parent = document.getElementById(button_id.substring(4));
+        parent.remove();
+        let compSubNum = 'wadaw';
+        let i = 0;
+        while (document.getElementById('compSubNum_'+compNum+'_'+i)){
+            compSubNum = 'compSubNum_'+compNum+'_'+i;
+            i++;
+        }
+        // console.log(comCatAfter);
+        document.getElementById('btn_'+comCatAfter).setAttribute("onClick","addSubject(this.id,`"+compSubNum+"`);");
+        document.getElementById(button_id).id = 'btn_'+compSubNum;
+    }
+</script>
+<script>
+    formSubmit.addEventListener('submit',function(event){
+        event.preventDefault();
+
+        // dimension
+        for(let i=0; i<arrInterview.dimension.length; i++){
+            let userScore = ''
+            for(let j=0; j<arrInterview.pic.length; j++){
+                if(arrInterview.pic_no == arrInterview.dimension[i].pic[j].pic_no){
+                    dimScoreUser = "dimScoreUser_"+i+"_"+j
+                    arrInterview.dimension[i].pic[j].answer = document.getElementById(dimScoreUser).value
+                }
+            }
+
+            // kebawah ga dipakai
+            // let dimHrNum = 'dimHrNum_'+i;
+            // let dimUser1Num = 'dimUser1Num_'+i;
+            // let dimUser2Num = 'dimUser2Num_'+i;
+            // arrInterview.dimension[i].hr_score = document.getElementById(dimHrNum).value
+            // arrInterview.dimension[i].user1_score = document.getElementById(dimUser1Num).value
+            // arrInterview.dimension[i].user2_score = document.getElementById(dimUser2Num).value
+        }
+
+        // competence
+        let picCode
+        for(let i=0; i<arrInterview.competence.length; i++){
+            
+            let lastSubject = 0;
+            while (document.getElementById('inp_compSubNum_'+i+'_'+lastSubject)){
+                lastSubject ++;
+            }
+            // console.log('lastSubject of '+i+' = '+lastSubject);
+
+            for(let j=0; j<lastSubject; j++){
+                let compSubNum = 'compSubNum_'+i+'_'+j;
+
+                for(k=0;k<arrInterview.pic.length;k++){
+                    picCode = arrInterview.pic[k].pic_no;
+                    compScoreUser = 'compScoreUser_'+i+'_'+j+'_'+k;
+                    if(j >=  arrInterview.competence[i].item_category.length){
+                        // console.log(compSubNum+' '+document.getElementById('inp_'+compSubNum).value);
+                        console.log(document.getElementById(compScoreUser).value);
+                        let newObj = {
+                            "subject":document.getElementById('inp_'+compSubNum).value,
+                            "pic":[]
+                        }
+                        for(l=0;l<arrInterview.pic.length;l++){
+                            if(arrInterview.pic_no == arrInterview.competence[i].item_category[0].pic[l].pic_no){
+                                newObj.pic[l] = {"pic_no": arrInterview.pic_no,"answer":document.getElementById(compScoreUser).value}
+                            }else{
+                                newObj.pic[l] = {"pic_no": arrInterview.competence[i].item_category[0].pic[l].pic_no,"answer":""}
+                            }
+                        }
+                        console.log({newObj});
+                        arrInterview.competence[i].item_category.push(newObj);
+                    }else{
+                        arrInterview.competence[i].item_category[j].subject = document.getElementById('inp_'+compSubNum).value;
+                        console.log({i},{j},{k});
+                        if(arrInterview.pic_no == arrInterview.competence[i].item_category[0].pic[k].pic_no){
+                            arrInterview.competence[i].item_category[j].pic[k].answer = document.getElementById(compScoreUser).value;
+                        }
+                    }
+                }
+            }
+        }
+
+        // evaluation
+        for(i=0;i<arrInterview.pic.length;i++){
+            if(arrInterview.pic_code == arrInterview.evaluation[0].pic[i].pic_code){
+                evalScoreUser = "evalScoreUser_"+i
+                arrInterview.evaluation[0].pic[i].answer = document.getElementById(evalScoreUser).value;
+            }
+        }
+        // arrInterview.evaluation[0].user1_score = document.getElementById("evalUser1").value;
+        // arrInterview.evaluation[0].user2_score = document.getElementById("evalUser2").value;
+        arrInterview.pos_confirm = document.getElementById("pos_confirm").value;
+        arrInterview.add_comment = document.getElementById("add_comment").value;
+
+        fetch("https://api.mocki.io/v1/22cd7270",{
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body:JSON.stringify(arrInterview.data)
+        })
+        .then(response => response.json())
+        .then(arrInterview => {
+            console.log('Success:'+arrInterview);
+            alert('Success')
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Error: '+error);
+        });
+
+        console.log(JSON.stringify(arrInterview))
+        alert('sukses');
+        event.preventDefault();
+    })
+</script>
