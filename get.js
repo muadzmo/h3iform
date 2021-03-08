@@ -61,7 +61,7 @@ function renderAll(responseJson){
         let descNum = 'desc_'+i;
         let remarksNum = 'remarks_'+i;
         let initialNum = 'inital_'+i;
-        let dateNum = 'date_'+i;
+        let dateNum = 'date_'+i; 
         let inpDate = 'inp_date_'+i;
         document.getElementById("tableBody").innerHTML+=
         ('<tr>'
