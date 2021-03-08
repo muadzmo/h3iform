@@ -201,8 +201,8 @@
 
 
     function renderAll(responseJson){
-        document.getElementById("app_name").value=`${responseJson.app_name}`;
-        document.getElementById("app_name").innerHTML=`${responseJson.app_name.replace("&apos;","'")}`;
+        //document.getElementById("app_name").value=`${responseJson.app_name}`;
+        document.getElementById("app_name").value=`${responseJson.app_name.replace("&apos;","'")}`;
         document.getElementById("app_id").value=`${responseJson.app_id}`;
         document.getElementById("position").value=`${responseJson.position}`;
         document.getElementById("grade").value=`${responseJson.grade.split("_")[1]}`;
