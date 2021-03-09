@@ -201,7 +201,7 @@
 
 
     function renderAll(responseJson){
-        //document.getElementById("app_name").value=`${responseJson.app_name}`;
+        document.getElementById("app_name").value=`${responseJson.app_name}`;
         document.getElementById("app_name").value=`${responseJson.app_name.replace("&apos;","'")}`;
         document.getElementById("app_id").value=`${responseJson.app_id}`;
         document.getElementById("position").value=`${responseJson.position}`;
@@ -523,13 +523,16 @@
         // arrInterview.evaluation[0].user2_score = document.getElementById("evalUser2").value;
         arrInterview.pos_confirm = document.getElementById("pos_confirm").value;
         arrInterview.add_comment = document.getElementById("add_comment").value;
+        const param = window.location.search.replace("?","&");
+        arrInterview.type = 2;
 
-        fetch("https://api.mocki.io/v1/22cd7270",{
+        // fetch("https://api.mocki.io/v1/22cd7270",{
+        fetch("http://192.168.100.221/sf6/index.cfm?sfid=sys.sec.cron.client.h3i.api&endpoint=CL_GOCustom_h3i_RecruitmentResultInterview.fGetData"+param,{
             method: "POST",
             headers: {
                 "Content-type": "application/json"
             },
-            body:JSON.stringify(arrInterview.data)
+            body:JSON.stringify(arrInterview)
         })
         .then(response => response.json())
         .then(arrInterview => {
@@ -540,9 +543,6 @@
             console.error('Error:', error);
             alert('Error: '+error);
         });
-
-        console.log(JSON.stringify(arrInterview))
-        alert('sukses');
         event.preventDefault();
     })
 </script>
